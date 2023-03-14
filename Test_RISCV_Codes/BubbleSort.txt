@@ -1,0 +1,40 @@
+#BubbleSort RISC-V Code
+#	Rohit Madan - 2020EEB1202
+#	Omkar Prashant More - 2020EEB1188
+#	Harsh Gupta - 2019MED1008
+
+addi x3, x0, 10 # N = x3 = 10
+main:
+	addi x31,x0,2
+    lui x21,0x10000
+    addi x21,x21,0x000 # x21-> base address of array -> 0x10000000
+bubbleSort:
+    add x18,x0,x0 #x18=i=0
+    blt x18,x3,.outerLoop 
+    bge x18,x3,.exit
+    .outerLoop:
+        add x12,x0,x0 #x12=j=0 -> function argument 1 of swap
+        sub x29,x3,x18 #x29 = n-i
+        addi x29,x29,-1 #x29=n-i-1
+        blt x12,x29,.innerLoop #if(j<(n-i-1)) run the innerloop
+        bge x12,x29,.outerLoopIncrement #otherwise increment i
+        .innerLoop:
+            addi x13,x12,1 #x13 = j+1 -> function argument 2 of swap
+            sll x5,x12,x31 #x5 =(j<<2) = 4*j
+            add x5,x5,x21 #x5 = 4j+x21 x21-> base address of sorted array
+            lw x22,0(x5) #sortedArray[j]
+            lw x23, 4(x5) #sortedArray[j+1]
+            blt x23,x22,.swap #if(sortedArray[j+1]<sortedArray[j]) swap
+            bge x23,x22,.innerLoopIncrement #otherwise increment j
+            .swap:
+            	sw x22,4(x5) #Storing value of sortedArray[j] at address of sortedArray[j+1]
+    			sw x23, 0(x5) #Storing value of previous sortedArray[j+1] at address of sortedArray[j]
+            .innerLoopIncrement:
+                addi x12,x12,1
+                blt x12,x29,.innerLoop
+                bge x12,x29,.outerLoopIncrement
+        .outerLoopIncrement:
+            addi x18,x18,1
+            blt x18,x3,.outerLoop
+            bge x18,x3,.exit
+.exit:

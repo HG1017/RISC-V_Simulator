@@ -1,0 +1,12 @@
+Functional Simulator for subset of RISC-V Single Cycle Processor
+Group No. 18
+
+README
+
+How to Execute
+	$cd src
+	$python GUI.py
+
+Upload the required .MC input file and click on Run Button to get the console output along with updated register values and data memory.
+
+

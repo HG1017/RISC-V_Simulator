@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        ".env": "bat",
+        "bitset": "cpp",
+        "iostream": "cpp"
+    }
+}

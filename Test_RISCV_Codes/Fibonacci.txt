@@ -1,0 +1,21 @@
+#Fibonacci RISC-V Code
+#	Rohit Madan - 2020EEB1202
+#	Omkar Prashant More - 2020EEB1188
+#	Harsh Gupta - 2019MED1008
+
+addi x3,x0,10 #Set x3=N 
+#N can take values N<=46 #Above that x2 goes out of range of int
+add x1,x0,x0 #x1=a=0
+addi x2,x0,1 #x2=b=1
+beq x3,x0,.n0condition
+add x4,x0,x0 #x4=i=0
+.loop: #For Loop
+addi x4,x4,1 #Keep on incrementing i
+bge x4,x3,.exit #Exit loop when x4==x3
+add x5,x1,x2 #c=a+b
+add x1,x2,x0 #a=b
+add x2,x5,x0 #b=c
+beq x0,x0,.loop #Loop again
+.n0condition: #Loop for n=0 condition
+addi x2,x2,-1
+.exit:
